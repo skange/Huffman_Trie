@@ -33,6 +33,7 @@ HFNode *get_hfNode();
 void hf_init();//get hftable
 int *word_freq();  //return *freq_arr
 HFNode **build(int word_cnt); //(字节总长度) return hf_arr
+void extract(HFNode *, unsigned char *, int n);//(hf_arr[0], empty arr， 0);
 
 //Trie
 Node *get_trie_node();
