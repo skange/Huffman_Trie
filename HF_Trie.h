@@ -17,6 +17,7 @@
     __typeof(a) swap_temp;\
     swap_temp = a, a = b, b = swap_temp;\
 }
+#define efficiency(a, b) (1.0 * a / (1.0 * b))
 
 typedef struct HFNode {
     int ch;
@@ -36,7 +37,11 @@ typedef struct pattern_Node {
 
 unsigned char hftable[256][10];
 int node_cnt = 0;
+<<<<<<< HEAD
 int search_times = 0;
+=======
+int search_cnt = 0;
+>>>>>>> 9cc0d6b57e41a98ba2943d5cd3e83838aaa17f35
 
 //HF
 HFNode *get_hfNode();
