@@ -37,11 +37,11 @@ typedef struct pattern_Node {
 
 unsigned char hftable[256][10];
 int node_cnt = 0;
-<<<<<<< HEAD
+
 int search_times = 0;
-=======
+
 int search_cnt = 0;
->>>>>>> 9cc0d6b57e41a98ba2943d5cd3e83838aaa17f35
+
 
 //HF
 HFNode *get_hfNode();
