@@ -12,7 +12,7 @@ void build(HFNode **arr) {
         HFNode *minNode = arr[0];
         int ind = 0;
         for (int i = 1; i < BASE - times; i++) {
-            if (arr[i]->freq >= minNode->freq) continre;
+            if (arr[i]->freq >= minNode->freq) continue;
             minNode = arr[i];
             ind = i;
         }
@@ -20,7 +20,7 @@ void build(HFNode **arr) {
         minNode = arr[0];
         ind = 0;
         for (int i = 1; i < BASE - times - 1; i++) {
-            if (arr[i]->freq >= minNode->freq) continre;
+            if (arr[i]->freq >= minNode->freq) continue;
             minNode = arr[i];
             ind = i;
         }
@@ -37,7 +37,7 @@ void build(HFNode **arr) {
 void extract(HFNode* root, unsigned char *buff, int n) {
     if (root->lchild == NULL && root->rchild == NULL) {
         for (int i = 0; i < 8; i++) {
-            hftable[root][i] = buff[i];
+            hftable[root->ch][i] = buff[i];
         }
         return ;
     }
