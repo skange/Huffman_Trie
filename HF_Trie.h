@@ -8,6 +8,15 @@
 #ifndef _HF_TRIE_H
 #define _HF_TRIE_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BASE 256
+#define swap(a, b) {\
+    __typeof(a) swap_temp;\
+    swap_temp = a, a = b, b = swap_temp;\
+}
 
 typedef struct HFNode {
     int ch;
@@ -32,14 +41,14 @@ int node_cot = 0;
 HFNode *get_hfNode();
 void hf_init();//get hftable
 int *word_freq();  //return *freq_arr
-HFNode **build(int word_cnt); //(字节总长度) return hf_arr
-void extract(HFNode *, unsigned char *, int n);//(hf_arr[0], empty arr， 0);
+void build(HFNode **hf_arr); 
+void extract(HFNode *root, unsigned char *buff, int n);//(hf_arr[0], empty arr， 0);
 
 //Trie
 Node *get_trie_node();
-PatNode *get_patnode(int);
-Node *insert(Trie, const unsigned char *);//(root, pattern) return root
-void search(Trie, const unsigned char **);//(root, text)
-char *find_word(unsigned char *);//(hfcode)
-void clear(Trie);
+PatNode *get_patnode(int len); //(hfm code length)
+Node *insert(Trie root, const unsigned char *pattern);// return root
+void search(Trie root, const unsigned char **text);
+char *find_word(unsigned char *hfcode);
+void clear(Trie root);
 #endif
