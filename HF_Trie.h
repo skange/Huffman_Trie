@@ -30,14 +30,18 @@ typedef struct Node {
     struct Node *next[2];//l = 0, r = 1;
 } Node, *Trie;
 
-typedef struct pattern_table {
+typedef struct pattern_Node {
     char *pattern;
     char *hfcode;
 } PatNode;
 
 unsigned char hftable[256][10];
 int node_cnt = 0;
+
+int search_times = 0;
+
 int search_cnt = 0;
+
 
 //HF
 HFNode *get_hfNode();
@@ -50,7 +54,8 @@ void extract(HFNode *root, unsigned char *buff, int n);//(hf_arr[0], empty arrï¼
 Node *get_trie_node();
 PatNode *get_patnode(int len); //(hfm code length)
 Node *insert(Trie root, const unsigned char *pattern);// return root
-void search(Trie root, const unsigned char **text);
+void search(Trie root, const unsigned char *text);
+PatNode *init_pattern_table()
 char *find_word(unsigned char *hfcode);
 void clear(Trie root);
 #endif
