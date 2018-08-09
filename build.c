@@ -33,17 +33,3 @@ void build(HFNode **arr) {
     }
     return ;
 }
-
-void extract(HFNode* root, unsigned char *buff, int n) {
-    if (root->lchild == NULL && root->rchild == NULL) {
-        for (int i = 0; i < 8; i++) {
-            hftable[root->ch][i] = buff[i];
-        }
-        return ;
-    }
-    buff[n] = '0';
-    extract(root->lchild, buff, n + 1);
-    buff[n] = '1';
-    extract(root->rchild, buff, n + 1);
-}
-
