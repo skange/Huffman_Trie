@@ -7,6 +7,10 @@
 
 #include "HF_Trie.h"
 
+HFNode *get_hfNode() {
+    return (HFNode*)calloc(sizeof(HFNode), 1);
+}
+
 void build(HFNode **arr) {
     for (int times = 0; times < BASE - 1; times++) {
         HFNode *minNode = arr[0];
@@ -53,7 +57,7 @@ int *get_word_freq() {
 void extract(HFNode *root, unsigned char *buff, int n) {
     if (root->rchild == NULL && root->lchild == NULL) {
         for (int i = 0; i < 8; i++) {
-            hutable[root->ch][i] = buff[i];
+            hftable[root->ch][i] = buff[i];
         }
     }
     buff[n] = '0';
@@ -74,6 +78,13 @@ void hf_init() {
         freq_arr[count++] = new_node;
     }
     build(freq_arr);
-    char buff[1000] = {0};
-    extract(freq_arr, buff, 0);
+    for (int i = 0; i < BASE; i++) {
+        unsigned char buff[10] = {0};
+        extract(freq_arr[i], buff, 0);
+    }
+}
+
+int main () {
+    hf_init();
+    return 0;
 }
