@@ -7,10 +7,11 @@
 
 #include "HF_Trie.h"
 #include "HF_Init.c"
-#include "Tire.c"
+//#include "Trie.c"
 
 int main() {
     hf_init();
+    output();
     Trie root = NULL;
     int letter_num, word_cnt = 0;
     unsigned char pattern[100][1000] = {0};

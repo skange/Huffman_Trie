@@ -42,7 +42,7 @@ typedef struct Node {
     struct Node *next[2];//l = 0, r = 1;
 } Node, *Trie;
 
-unsigned char hftable[BASE][10];
+unsigned char hftable[BASE][100];
 int node_cnt = 0;
 int search_times = 0;
 
