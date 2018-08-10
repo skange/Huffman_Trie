@@ -13,6 +13,7 @@
 #include <string.h>
 
 #define BASE 256
+#define BL '0'
 #define swap(a, b) {\
     __typeof(a) swap_temp;\
     swap_temp = a, a = b, b = swap_temp;\
