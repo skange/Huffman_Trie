@@ -29,16 +29,17 @@ Node *insert(Trie root, const unsigned char *pattern) {
     Node *p = root;
     for (int i = 0; pattern[i]; i++) {
         char temp[10] = {0};
-        strncpy(temp, hftable[pattern[i]], strlen((char *)hftable[pattern[i]]));
-        memset(temp, 0, 10);
+        strncpy(temp, (char *)hftable[pattern[i]], strlen((char *)hftable[pattern[i]]));
+        //printf("%s\n", temp);
         for (int j = 0; temp[j]; j++) {
             int ind = temp[j] - BL;
             if (p->next[ind] == NULL) p->next[ind] = get_trie_node();
             p = p->next[ind];
         }
+        memset(temp, 0, 10);
     }
     p->flag = 1;
-    p->str = strdup(pattern);
+    p->str = strdup((char *)pattern);
     return root;
 }
 
@@ -47,8 +48,9 @@ void search(Trie root, const unsigned char *text) {
     int len = strlen((char *)text);
     unsigned char *text_temp = (unsigned char *)calloc(sizeof(unsigned char), len * 10);
     for (int i = 0; text[i]; i++) {
-        strncat(text_temp, hftable[text[i]], strlen((char *)hftable[text[i]]));
+        strncat((char *)text_temp, (char *)hftable[text[i]], strlen((char *)hftable[text[i]]));
     }
+    //printf("%s\n", text_temp);
     for (int i = 0; text_temp[i]; i++) {
         int j = i;
         p = root;
