@@ -13,9 +13,9 @@
 #include <string.h>
 #define DBUG 1
 #ifndef DBUG
-#define pirnt1(a, b) printf(a, b)
-#define print2(a, b, c) printf(a, b, c)
-#define print3(a, b, c, d) pirntf(a, b, c, d)
+#define print1(a, b) printf(#a, b)
+#define print2(a, b, c) printf(#a, b, c)
+#define print3(a, b, c, d) pirntf(#a, b, c, d)
 #else 
 #define pirnt1(a, b) 
 #define print2(a, b, c) 

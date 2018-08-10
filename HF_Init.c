@@ -15,7 +15,7 @@ void build(HFNode **arr) {
     for (int times = 0; times < BASE - 1; times++) {
         HFNode *minNode = arr[0];
         int ind = 0;
-        for (int i = 1; i < BASE - times; i++) {
+        for (int i = 0; i < BASE - times; i++) {
             if (arr[i]->freq >= minNode->freq) continue;
             minNode = arr[i];
             ind = i;
@@ -33,7 +33,7 @@ void build(HFNode **arr) {
         new_node->lchild = arr[BASE - times - 1];
         new_node->rchild = arr[BASE - times - 2];
         new_node->freq = arr[BASE - times - 1]->freq + arr[BASE - times - 2]->freq;
-        arr[BASE - times - 2] = get_hfNode();
+        arr[BASE - times - 2] = new_node;
     }
     return ;
 }
@@ -43,21 +43,26 @@ int *get_word_freq() {
     FILE *fp = NULL;
     fp = fopen("./corpus", "r");
     if (fp == NULL) perror("fopen:");
-    while (!feof(fp)) {
-        char str[1000] = {0};
-        fgets(str, 1000, fp);
-        for (int i = 0; str[i]; i++) {
-            word_freq[(int)str[i]]++;    
+    unsigned char word[10000] = {0};
+    while (fscanf(fp, "%s", word) != EOF) {
+        for (int i = 0; word[i]; i++) {
+            ++word_freq[(int)word[i]];
         }
+        memset(word, 0, sizeof(word));
+    }
+    for (int i = 0; i < BASE; i++) {
+        word_freq[i] += (word_freq[i] == 0);
     }
     return word_freq;
 }
 
 void extract(HFNode *root, unsigned char *buff, int n) {
+    buff[n] = 0;
     if (root->rchild == NULL && root->lchild == NULL) {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; buff[i]; i++) {
             hftable[root->ch][i] = buff[i];
         }
+        return ;
     }
     buff[n] = '0';
     extract(root->lchild, buff, n + 1);
@@ -68,9 +73,6 @@ void extract(HFNode *root, unsigned char *buff, int n) {
 
 void hf_init() {
     int *word_freq = get_word_freq();
-    for (int i = 0; i < BASE; i++) {
-        
-    }
     HFNode *freq_arr[BASE];
     int count = 0;
     for (int i = 0; i < BASE; i++) {
@@ -80,7 +82,7 @@ void hf_init() {
         freq_arr[count++] = new_node;
     }
     build(freq_arr);
-    unsigned char buff[1000] = {0};
+    unsigned char buff[10] = {0};
     extract(freq_arr[0], buff, 0);
 }
 
