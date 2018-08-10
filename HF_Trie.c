@@ -7,7 +7,7 @@
 
 #include "HF_Trie.h"
 #include "HF_Init.c"
-//#include "Trie.c"
+#include "Trie.c"
 
 int main() {
     hf_init();
@@ -20,10 +20,10 @@ int main() {
     for (int i = 0; i < letter_num; i++) {
         scanf("%[^\n]s", pattern[i]);
         getchar();
-        word_cnt += strlen(pattern[i]);
+        word_cnt += strlen((char *)pattern[i]);
         root = insert(root, pattern[i]);
     }
-    char text[1000] = {0};
+    unsigned char text[1000] = {0};
     scanf("%[^\n]s", text);
     getchar();
     search(root, text);
