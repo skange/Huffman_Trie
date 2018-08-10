@@ -39,14 +39,13 @@ void build(HFNode **arr) {
 }
 
 int *get_word_freq() {
-    int *word_freq = (int*)calloc(sizeof(int), 10000);
+    int *word_freq = (int*)calloc(sizeof(int), BASE);
     FILE *fp = NULL;
     fp = fopen("./corpus", "r");
     if (fp == NULL) perror("fopen:");
     while (!feof(fp)) {
-        char str[1000];
-        memset(str, 0, 1000);
-        fgets(str, 100, fp);
+        char str[1000] = {0};
+        fgets(str, 1000, fp);
         for (int i = 0; str[i]; i++) {
             word_freq[(int)str[i]]++;    
         }
@@ -69,6 +68,9 @@ void extract(HFNode *root, unsigned char *buff, int n) {
 
 void hf_init() {
     int *word_freq = get_word_freq();
+    for (int i = 0; i < BASE; i++) {
+        
+    }
     HFNode *freq_arr[BASE];
     int count = 0;
     for (int i = 0; i < BASE; i++) {
@@ -78,13 +80,14 @@ void hf_init() {
         freq_arr[count++] = new_node;
     }
     build(freq_arr);
+    unsigned char buff[1000] = {0};
+    extract(freq_arr[0], buff, 0);
+}
+
+
+void output() {
     for (int i = 0; i < BASE; i++) {
-        unsigned char buff[10] = {0};
-        extract(freq_arr[i], buff, 0);
+        printf("%d %s\n", i, hftable[i]);
     }
 }
 
-int main () {
-    hf_init();
-    return 0;
-}
