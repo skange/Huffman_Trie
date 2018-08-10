@@ -51,7 +51,16 @@ int *get_word_freq() {
 }
 
 void extract(HFNode *root, unsigned char *buff, int n) {
-    
+    if (root->rchild == NULL && root->lchild == NULL) {
+        for (int i = 0; i < 8; i++) {
+            hutable[root->ch][i] = buff[i];
+        }
+    }
+    buff[n] = '0';
+    extract(root->lchild, buff, n + 1);
+    buff[n] = '1';
+    extract(root->rchild, buff, n + 1);
+    return ;
 }
 
 void hf_init() {
@@ -66,5 +75,5 @@ void hf_init() {
     }
     build(freq_arr);
     char buff[1000] = {0};
-    //extract(freq_arr, buff, int n);
+    extract(freq_arr, buff, 0);
 }
