@@ -89,7 +89,6 @@ void hf_init() {
         new_node->freq = word_freq[i];
         freq_arr[count++] = new_node;
     }
-
     build(freq_arr);
     unsigned char buff[BASE] = {0};
     extract(freq_arr[0], buff, 0);

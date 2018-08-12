@@ -15,21 +15,21 @@ int main() {
     Trie root = NULL;
     int letter_num, word_cnt = 0, text_cnt = 0;
     unsigned char pattern[10000] = {0};
-    scanf("%d", &letter_num);
-    getchar();
-    for (int i = 0; i < letter_num; i++) {
-        scanf("%[^\n]s", pattern);
-        getchar();
+    FILE *fp_p = fopen("pattern", "r");
+    while (fscanf(fp_p, "%s", pattern) != EOF) {
         word_cnt += strlen((char *)pattern);
         root = insert(root, pattern);
     }
-    unsigned char text[10000] = {0};
-    while (fscanf(stdin, "%s", text) != EOF) {
+    fclose(fp_p);
+    FILE *fp_t = fopen("text", "r");
+    unsigned char text[100000] = {0};
+    while (fscanf(fp_t, "%s", text) != EOF) {
         int len = strlen((char *)text);
         text_cnt += len;
         text[len] = '\0';
         search(root, text);
     }
+    fclose(fp_t);
     int nodes_size = sizeof(Node) * node_cnt;
     printf("storage rate : %lf\n", efficiency(word_cnt, nodes_size));
     printf("time rate : %lf\n", efficiency(search_times, text_cnt));
