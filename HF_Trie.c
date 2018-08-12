@@ -13,19 +13,16 @@ int main() {
     hf_init();
     output();
     Trie root = NULL;
-    int letter_num, word_cnt = 0;
-    unsigned char pattern[100][1000] = {0};
-    scanf("%d", &letter_num);
-    getchar();
-    for (int i = 0; i < letter_num; i++) {
-        scanf("%[^\n]s", pattern[i]);
-        getchar();
-        word_cnt += strlen((char *)pattern[i]);
-        root = insert(root, pattern[i]);
+    int word_cnt = 0;
+    unsigned char pattern[11000] = {0};
+    FILE *fin = fopen("text", "r");
+    while (fgets((char *)pattern, 10000, fin) != NULL) {
+        word_cnt += strlen((char *)pattern);
+        root = insert(root, pattern);
     }
-    unsigned char text[1000] = {0};
-    scanf("%[^\n]s", text);
-    getchar();
+    unsigned char text[100000] = {0};
+    FILE *fp = fopen("t", "r");
+    fscanf(fp, "%[^\n]s", text);
     search(root, text);
     int nodes_size = sizeof(Node) * node_cnt;
     printf("storage rate : %lf\n", efficiency(word_cnt, nodes_size));

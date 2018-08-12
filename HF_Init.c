@@ -41,7 +41,7 @@ void build(HFNode **arr) {
 int *get_word_freq() {
     int *word_freq = (int*)calloc(sizeof(int), BASE);
     FILE *fp = NULL;
-    fp = fopen("./corpus", "r");
+    fp = fopen("./text.txt", "r");
     if (fp == NULL) perror("fopen:");
     unsigned char word[10000] = {0};
     while (fscanf(fp, "%s", word) != EOF) {
@@ -82,12 +82,7 @@ void hf_init() {
         new_node->freq = word_freq[i];
         freq_arr[count++] = new_node;
     }
-
     build(freq_arr);
-
-    for (int i = 0; i < BASE; i++) {
-        //printf("%d %d\n",freq_arr[i]->ch, freq_arr[i]->freq);
-    }
     unsigned char buff[BASE] = {0};
     extract(freq_arr[0], buff, 0);
 }
