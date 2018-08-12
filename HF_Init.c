@@ -7,6 +7,10 @@
 
 #include "HF_Trie.h"
 
+void HF_clear() {
+    
+}
+
 HFNode *get_hfNode() {
     return (HFNode*)calloc(sizeof(HFNode), 1);
 }
@@ -90,6 +94,7 @@ void hf_init() {
     }
     unsigned char buff[BASE] = {0};
     extract(freq_arr[0], buff, 0);
+    HF_free(freq_arr[0]);
 }
 
 

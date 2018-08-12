@@ -11,9 +11,9 @@
 
 int main() {
     hf_init();
-    output();
+    //output();
     Trie root = NULL;
-    int letter_num, word_cnt = 0;
+    int letter_num, word_cnt = 0, text_cnt = 0;
     unsigned char pattern[100][1000] = {0};
     scanf("%d", &letter_num);
     getchar();
@@ -23,13 +23,14 @@ int main() {
         word_cnt += strlen((char *)pattern[i]);
         root = insert(root, pattern[i]);
     }
-    unsigned char text[1000] = {0};
-    scanf("%[^\n]s", text);
-    getchar();
-    search(root, text);
+    unsigned char text[10000] = {0};
+    while (fscanf(stdout, "%[^\n]s", text) != EOF) {
+        text_cnt += strlen(text);
+        search(root, text);
+    }
     int nodes_size = sizeof(Node) * node_cnt;
     printf("storage rate : %lf\n", efficiency(word_cnt, nodes_size));
-    printf("time rate : %lf\n", efficiency(search_times, word_cnt));
+    printf("time rate : %lf\n", efficiency(search_times, text_cnt));
     return 0;
 }
 
