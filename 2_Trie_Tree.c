@@ -21,6 +21,7 @@ typedef struct Node {
 } Node;
 
 int node_cnt = 0;
+int search_times = 0;
 
 Node *get_new_node() {
     Node *p = (Node *)calloc(sizeof(Node), 1);
@@ -73,7 +74,7 @@ void search(Node *root, const unsigned char *text) {
         int j = i;
         p = root;
         while (p && p->next[text_temp[j] - BL]) {
-            //search_times += 1;
+            search_times += 1;
             p = p->next[text_temp[j] - BL];
             if (p->flag == 1) {
                 printf("find word : %s", p->str);
@@ -115,5 +116,6 @@ int main() {
     fscanf(fp, "%[^\n]s", text);
     search(root, text);
     printf("storage rate : %lf\n", 1.0 * total_count / (1.0 * node_cnt * sizeof(Node)));
+    printf("time tate : %lf\n", 1.0 * search_times / (1.0 * total_count));
     return 0;
 }

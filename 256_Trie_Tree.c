@@ -49,6 +49,8 @@ Node *insert(Node *root, const unsigned char *str) {
     return root;
 }
 
+int searchtime = 0;
+
 void search(Node *root, const unsigned char *text) {
     Node *p = root;
     int len = strlen((char *)text);
@@ -56,6 +58,7 @@ void search(Node *root, const unsigned char *text) {
         int j = i;
         p = root;
         while (p && p->next[text[j]]) {
+            searchtime += 1;
             p = p->next[text[j]];
             if (p->flag == 1) {
                 printf("find word : %s", p->str);
@@ -92,5 +95,6 @@ int main() {
     fscanf(fp, "%[^\n]s", text);
     search(root, text);
     printf("storage rate : %lf\n", 1.0 * total_count / (1.0 * node_cnt * sizeof(Node)));
+    printf("time rate : %lf\n", 1.0 * searchtime / (1.0 * total_count));
     return 0;
 }
