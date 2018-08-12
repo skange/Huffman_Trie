@@ -7,8 +7,11 @@
 
 #include "HF_Trie.h"
 
-void HF_clear() {
-    
+void HF_clear(HFNode *root) {
+    if (root == NULL) return ;
+    HF_clear(root->lchild);
+    HF_clear(root->rchild);
+    free(root);
 }
 
 HFNode *get_hfNode() {
@@ -88,13 +91,9 @@ void hf_init() {
     }
 
     build(freq_arr);
-
-    for (int i = 0; i < BASE; i++) {
-        //printf("%d %d\n",freq_arr[i]->ch, freq_arr[i]->freq);
-    }
     unsigned char buff[BASE] = {0};
     extract(freq_arr[0], buff, 0);
-    HF_free(freq_arr[0]);
+    HF_clear(freq_arr[0]);
 }
 
 

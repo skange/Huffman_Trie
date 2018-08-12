@@ -14,18 +14,20 @@ int main() {
     //output();
     Trie root = NULL;
     int letter_num, word_cnt = 0, text_cnt = 0;
-    unsigned char pattern[100][1000] = {0};
+    unsigned char pattern[10000] = {0};
     scanf("%d", &letter_num);
     getchar();
     for (int i = 0; i < letter_num; i++) {
-        scanf("%[^\n]s", pattern[i]);
+        scanf("%[^\n]s", pattern);
         getchar();
-        word_cnt += strlen((char *)pattern[i]);
-        root = insert(root, pattern[i]);
+        word_cnt += strlen((char *)pattern);
+        root = insert(root, pattern);
     }
     unsigned char text[10000] = {0};
-    while (fscanf(stdout, "%[^\n]s", text) != EOF) {
-        text_cnt += strlen(text);
+    while (fscanf(stdin, "%s", text) != EOF) {
+        int len = strlen((char *)text);
+        text_cnt += len;
+        text[len] = '\0';
         search(root, text);
     }
     int nodes_size = sizeof(Node) * node_cnt;

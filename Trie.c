@@ -46,15 +46,14 @@ Node *insert(Trie root, const unsigned char *pattern) {
 void search(Trie root, const unsigned char *text) {
     Node *p = root;
     int len = strlen((char *)text);
-    unsigned char *text_temp = (unsigned char *)calloc(sizeof(unsigned char), len * 10);
+    unsigned char *text_temp = (unsigned char *)calloc(sizeof(unsigned char), len * 100);
     for (int i = 0; text[i]; i++) {
         strncat((char *)text_temp, (char *)hftable[text[i]], strlen((char *)hftable[text[i]]));
     }
-    //printf("%s\n", text_temp);
     for (int i = 0; text_temp[i]; i++) {
         int j = i;
         p = root;
-        while (p && p->next[text_temp[j] - BL]) {
+        while (p && text_temp[j] && p->next[text_temp[j] - BL]) {
             search_times += 1;
             p = p->next[text_temp[j] - BL];
             if (p->flag == 1) {
@@ -64,5 +63,6 @@ void search(Trie root, const unsigned char *text) {
             j++;
         }
     }
+    free(text_temp);
     return ;
 }
