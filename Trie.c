@@ -45,6 +45,7 @@ Node *insert(Trie root, const unsigned char *pattern) {
 
 void search(Trie root, const unsigned char *text) {
     Node *p = root;
+    search_times += 1;
     int len = strlen((char *)text);
     unsigned char *text_temp = (unsigned char *)calloc(sizeof(unsigned char), len * 100);
     for (int i = 0; text[i]; i++) {
