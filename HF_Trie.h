@@ -11,15 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define DBUG 1
-#ifndef DBUG
-#define print1(a, b) printf(#a, b)
-#define print2(a, b, c) printf(#a, b, c)
-#define print3(a, b, c, d) pirntf(#a, b, c, d)
-#else 
-#define pirnt1(a, b) 
-#define print2(a, b, c) 
-#define print3(a, b, c, d) 
+
+
+#define OPEN_DBG 1
+#ifdef OPEN_DBG 
+#define DBG(format,...) printf(""__FILE__" : %s : %05d==>"format"\n", __func__, __LINE__,##__VA_ARGS__)
+#else
+#define DBG(s) 1
 #endif
 
 #define BASE 256
